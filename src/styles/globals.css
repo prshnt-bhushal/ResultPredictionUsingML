@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+NavBar color :rgb(203 ,213 ,225), #cbd5e1
+body : #d3d8de
+secondar color : #b4b7bc
+Accent : white
+somewhere: #576f72
+
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+input,
+select,
+textarea {
+  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
+}
+
+@layer base {
+  body {
+    /* background-image: url('/images/bgImagetry.png');
+        background-size: 100% 100%; ; */
+        /* text #E8EEEE */
+    @apply text-black bg-[#CEE7E8] tracking-wide;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  li {
+    @apply cursor-pointer;
+  }
+  p {
+    @apply text-lg;
+  }
+}
+
+.dropdown-link{
+  @apply flex p-2 hover:bg-gray-200;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-shake {
+  animation-duration: 0.5s;
+  animation-name: shake;
+}
