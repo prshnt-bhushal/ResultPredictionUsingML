@@ -12,7 +12,7 @@ import howMuchImg from '../../public/Images/howMuchImg.png';
 export default function Home() {
   return (
     <div>
-      <Layout title="Home">
+      <Layout title="HOME">
         {/* what Section */}
         <HomeLayout
           sideImg={whatImg}

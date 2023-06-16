@@ -41,9 +41,9 @@ export default function loginScreen() {
     }
   };
   return (
-    <Layout title="Login">
+    <Layout title="LOGIN">
       <form
-        className="mx-auto max-w-screen-sm shadow-md p-4 rounded-md text-center"
+        className="mx-auto pt-[80px] max-w-screen-sm shadow-md p-4 rounded-md text-center"
         onSubmit={handleSubmit(submitHandler)}
       >
         <h1 className="mb-4 pb-5 w-full text-2xl font-bold uppercase">
