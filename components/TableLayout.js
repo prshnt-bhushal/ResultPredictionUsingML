@@ -1,62 +1,28 @@
-import React from 'react';
-
-export default function TableLayout({ semNum }) {
+export default function TableLayout({ results }) {
   return (
     <div className="flex justify-between gap-10 p-4">
-      <span className="text-xl font-bold p-4">{semNum} Semester</span>
+      <span className="text-xl font-bold p-4">{results[0]?.semester}</span>
       <div>
-        {/*  table of 6 column  */}
-        <table class="table-auto w-full">
+        <table className="table-auto w-full">
           <thead>
             <tr>
-              <th class="border bg-slate-500 px-4 py-2">Subject Code</th>
-              <th class="border bg-slate-500 px-4 py-2">Subject</th>
-              <th class="border bg-slate-500 px-4 py-2">Credit</th>
-              <th class="border bg-slate-500 px-4 py-2">Grade</th>
+              <th className="border bg-slate-500 px-4 py-2">Subjects</th>
+              <th className="border bg-slate-500 px-4 py-2">Grade</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-gray-100">
-              <td class="px-4 py-2">Subject 1</td>
-              <td class="px-4 py-2">Sub X</td>
-              <td class="px-4 py-2">4</td>
-              <td class="px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-white">
-              <td class="px-4 py-2">Subject 2</td>
-              <td class="px-4 py-2">Sub X</td>
-              <td class="px-4 py-2">4</td>
-              <td class="px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-gray-100">
-              <td class=" px-4 py-2">Subject 3</td>
-              <td class=" px-4 py-2">Sub X</td>
-              <td class=" px-4 py-2">4</td>
-              <td class=" px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-white">
-              <td class="px-4 py-2">Subject 4</td>
-              <td class="px-4 py-2">Sub X</td>
-              <td class="px-4 py-2">4</td>
-              <td class="px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-gray-100">
-              <td class=" px-4 py-2">Subject 5</td>
-              <td class=" px-4 py-2">Sub X</td>
-              <td class=" px-4 py-2">4</td>
-              <td class=" px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-white">
-              <td class="px-4 py-2">Subject 6</td>
-              <td class="px-4 py-2">Sub X</td>
-              <td class="px-4 py-2">4</td>
-              <td class="px-4 py-2">A+</td>
-            </tr>
-            <tr class="bg-gray-100">
-              <td class="px-4 py-2">SGPA :</td>
-              <td class="px-4 py-2"></td>
-              <td class="px-4 py-2"></td>
-              <td class="px-4 py-2">3.89</td>
+            {results[0]?.subjects.map((subjects, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}
+              >
+                <td className="px-4 py-2">{subjects.name}</td>
+                <td className="px-4 py-2">{subjects.grade}</td>
+              </tr>
+            ))}
+            <tr className="bg-gray-100">
+              <td className="px-4 py-2">SGPA:</td>
+              <td className="px-4 py-2">{results[0]?.sgpa}</td>
             </tr>
           </tbody>
         </table>

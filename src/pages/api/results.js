@@ -1,29 +1,20 @@
-import db from "../../../utils/db";
-import Results from "../../../models/Results";
+// Import necessary modules and models
+import Results from '../../../models/Results';
 
-
-const ResultsData = async ( res, next) =>
-{
-    let results;
-    try {
-      results = await Results.find({});
-    } catch (err) {
-      const error = new HttpError(
-        'Fetching results failed, please try again later.',
-        500
-      );
-      return next(error);
-    }
-    res.json({
-      results: results.map((result) => result.toObject({ getters: true })),
-    });
+const ResultsData = async (req, res, next) => {
+  let results;
+  try {
+    const userId = req.user.sNum; // Assuming user ID is stored in req.user.id
+    results = await Results.find({ userId });
+  } catch (err) {
+    // Handle the error
+  }
+  res.json({
+    results: results.map((result) => result.toObject({ getters: true })),
+  });
 };
 
-exports.ResultsData = ResultsData;
-
-
-
-
+export default ResultsData;
 
 
 
@@ -31,8 +22,7 @@ exports.ResultsData = ResultsData;
 
 // const Result = require('../../../models/Results');
 
-
-//ResultPost API 
+//ResultPost API
 
 // const resultPost = async (req, res, next) => {
 //   const { sNum,semester, subjects } = req.body;
