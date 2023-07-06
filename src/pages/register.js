@@ -16,7 +16,7 @@ export default function registerScreen() {
 
   useEffect(() => {
     if (session?.user) {
-      router.push(redirect || '/');
+      router.push(redirect || '/profile');
     }
   }, [router, session, redirect]);
   const {
