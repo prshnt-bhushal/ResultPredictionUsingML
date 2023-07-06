@@ -1,32 +1,55 @@
-export default function TableLayout({ results }) {
+import { useQuery } from 'react-query';
+import { getResults } from '../lib/helper';
+
+export default function TableLayout({ symbolNumber }) {
+const { isLoading, error, data } = useQuery(
+  'results',
+  () => getResults(symbolNumber),
+  {
+    onSuccess: (data) => {
+      console.log(data.results);
+    },
+  }
+);
+const results = data.results || [];
+
+  if (isLoading) return <div>Data Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
-    <div className="flex justify-between gap-10 p-4">
-      <span className="text-xl font-bold p-4">{results[0]?.semester}</span>
-      <div>
-        <table className="table-auto w-full">
-          <thead>
-            <tr>
-              <th className="border bg-slate-500 px-4 py-2">Subjects</th>
-              <th className="border bg-slate-500 px-4 py-2">Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results[0]?.subjects.map((subjects, index) => (
-              <tr
-                key={index}
-                className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}
-              >
-                <td className="px-4 py-2">{subjects.name}</td>
-                <td className="px-4 py-2">{subjects.grade}</td>
+    <div className="grid grid-rows-4 grid-flow-col gap-4 m-2 ">
+      {results.map((result, index) => (
+        <div key={index}>
+          <h2 className="uppercase text-lg font-semibold p-2">
+            {result.semester} Semester
+          </h2>
+          <table className="min-w-max w-full table-auto border">
+            <thead>
+              <tr className="bg-[#337476] text-white uppercase text-sm leading-normal">
+                <th className="py-3 px-6 text-left border-l-2">Subject</th>
+                <th className="py-3 px-6 text-left border-l-2">Grade</th>
               </tr>
-            ))}
-            <tr className="bg-gray-100">
-              <td className="px-4 py-2">SGPA:</td>
-              <td className="px-4 py-2">{results[0]?.sgpa}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="cursor-pointer text-sm font-light">
+              {result.subjects.map((subject, index) => (
+                <tr
+                  className={`${
+                    index % 2 === 0 ? 'bg-[#6ba1a3]' : 'bg-[#7fb8ba]'
+                  } hover:bg-[#88b6b8]`}
+                  key={index}
+                >
+                  <td className="py-3 px-6 text-left font-semibold whitespace-nowrap border-l-2">
+                    {subject.name}
+                  </td>
+                  <td className="py-3 px-6 text-left text-white font-bold whitespace-nowrap border-l-2">
+                    {subject.grade}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
     </div>
   );
 }

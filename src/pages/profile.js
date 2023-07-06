@@ -7,14 +7,15 @@ import { useSession } from 'next-auth/react';
 export default function Profile() {
   const [results, setResults] = useState([]);
   const { status, data: session } = useSession();
+  const symbolNumber = session?.user?.sNum;
 
-  useEffect(() => {
-    // Fetch the results for the logged-in user
-    fetch('/api/results')
-      .then((response) => response.json())
-      .then((data) => setResults(data.results))
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   // Fetch the results for the logged-in user
+  //   fetch('/api/results')
+  //     .then((response) => response.json())
+  //     .then((data) => setResults(data.results))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <Layout title="User Profile">
@@ -22,7 +23,13 @@ export default function Profile() {
         {/* User Details */}
         <div className="flex font-semibold gap-2">
           {/* <span>Welcome {session.user.name}</span> */}
-          {/* <span>SymbolNumber : {session.user.sNum}</span> */}
+          {status === 'loading' ? (
+            'Loading...'
+          ) : session?.user ? (
+            <span>SymbolNumber: {session.user.sNum}</span>
+          ) : (
+            <span>Not signed in</span>
+          )}
           <span>Your Results:</span>
         </div>
         <div className="flex justify-between">
@@ -33,7 +40,7 @@ export default function Profile() {
           </div>
           {/* Result of Semester table*/}
           <div className="">
-            <TableLayout results={results} />
+            <TableLayout symbolNumber={symbolNumber}/>
           </div>
         </div>
         {/* Predict next Result */}
