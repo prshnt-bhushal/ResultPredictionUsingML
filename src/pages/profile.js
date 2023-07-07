@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import ResultAnalysisLayout from '../../components/ResultAnalysisLayout';
 import TableLayout from '../../components/TableLayout';
 import { useSession } from 'next-auth/react';
 
@@ -24,14 +22,9 @@ export default function Profile() {
             <span>Not signed in</span>
           )}
         </div>
-        <div className="flex justify-evenly  flex-col md:flex-row">
-          {/* Result Analysis Part */}
-          <div className="p-3 order-1 md:order-2">
-            <h2 className="font-medium text-lg">Result Analysis</h2>
-            <ResultAnalysisLayout />
-          </div>
+        <div className="flex justify-center flex-col">
           {/* Result of Semester table*/}
-          <div className="p-3 order-2 md:order-1">
+          <div className="p-3">
             <h2 className="font-medium text-lg">Results:</h2>
             <TableLayout symbolNumber={symbolNumber} />
           </div>
