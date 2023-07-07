@@ -13,8 +13,13 @@ export default function NavBar() {
   return (
     <>
       <nav className="flex fixed z-[100] justify-between bg-[#337476] shadow-md p-5 w-full">
-        <div>
-          <h1>Result Predication</h1>
+        <div className='flex'>
+          <img
+            src="../images/icon.png"
+            alt="logo"
+            width={26}
+          />
+          <h1 className='px-2'>Result Predication</h1>
         </div>
         <div className="flex gap-6 uppercase">
           <ul className="flex font-medium justify-between gap-4 ">

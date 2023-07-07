@@ -51,10 +51,10 @@ export default function Profile() {
           <h2 className="py-2 font-medium text-lg">Predict Your Next Result:</h2>
           <button data-text="Awesome" className="button" onClick={handlePredict}>
             <span className="actual-text">
-              &nbsp;Results&nbsp;
+              &nbsp;Predict&nbsp;
             </span>
             <span className="hover-text" aria-hidden="true">
-              &nbsp;Results&nbsp;
+              &nbsp;Predict&nbsp;
             </span>
           </button>
         </div>

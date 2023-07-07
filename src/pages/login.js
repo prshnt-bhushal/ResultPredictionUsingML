@@ -6,9 +6,10 @@ import { getError } from '../../utils/error';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import {FaMagnifyingGlass} from 'react-icons/fa';
 // import LoadingSpinner from '@/components/LoadingSpinner';
 
-export default function loginScreen({setIsLoadingProps}) {
+export default function loginScreen({ setIsLoadingProps }) {
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function loginScreen({setIsLoadingProps}) {
         onSubmit={handleSubmit(submitHandler)}
       >
         <h1 className="mb-4 pb-5 w-full text-2xl font-bold uppercase">
-          welcome back
+          welcome back 
         </h1>
         <div className="mb-4">
           <label htmlFor="email" className="sr-only">
