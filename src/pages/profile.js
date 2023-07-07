@@ -1,10 +1,27 @@
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import TableLayout from '../../components/TableLayout';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 export default function Profile() {
   const { status, data: session } = useSession();
   const symbolNumber = session?.user?.sNum;
+  const router = useRouter();
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+  if (!session) {
+    // User is not authenticated, redirect to login page
+    router.push('/login');
+    return null;
+  }
+
+
+  const handlePredict = () => {
+    toast.success('Predicting...');
+  };
 
   return (
     <Layout title="User Profile">
@@ -30,11 +47,16 @@ export default function Profile() {
           </div>
         </div>
         {/* Predict next Result */}
-        <div>
-          <span>Predict Next Result</span>
-          <div>
-            <button>Click to Predict</button>
-          </div>
+        <div className='p-2'>
+          <h2 className="py-2 font-medium text-lg">Predict Your Next Result:</h2>
+          <button data-text="Awesome" className="button" onClick={handlePredict}>
+            <span className="actual-text">
+              &nbsp;Results&nbsp;
+            </span>
+            <span className="hover-text" aria-hidden="true">
+              &nbsp;Results&nbsp;
+            </span>
+          </button>
         </div>
       </div>
     </Layout>

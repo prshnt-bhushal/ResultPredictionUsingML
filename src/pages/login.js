@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 // import LoadingSpinner from '@/components/LoadingSpinner';
 
-export default function loginScreen() {
+export default function loginScreen({setIsLoadingProps}) {
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -27,6 +27,8 @@ export default function loginScreen() {
   } = useForm();
 
   const submitHandler = async ({ email, password }) => {
+    setIsLoadingProps(true); // Set isLoading to true
+
     try {
       const res = await signIn('credentials', {
         redirect: false,
@@ -39,6 +41,10 @@ export default function loginScreen() {
     } catch (err) {
       toast.error(getError(err));
     }
+
+    setTimeout(() => {
+      setIsLoadingProps(false); // Set loading state to false after 3 seconds
+    }, 3000); // Delay for 2 seconds (2000 milliseconds)
   };
   return (
     <Layout title="LOGIN">

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function registerScreen() {
+export default function registerScreen({ setIsLoadingProps}) {
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -27,6 +27,7 @@ export default function registerScreen() {
   } = useForm();
 
   const submitHandler = async ({ sNum, name, email, password }) => {
+    setIsLoadingProps(true); // Set loading state to true
     try {
       await axios.post('/api/auth/signup', { sNum, name, email, password });
 
@@ -43,6 +44,9 @@ export default function registerScreen() {
     } catch (err) {
       toast.error(getError(err));
     }
+    setTimeout(() => {
+      setIsLoadingProps(false); // Set loading state to false after 3 seconds
+    }, 3000);
   };
   return (
     <Layout title="Create Account">
