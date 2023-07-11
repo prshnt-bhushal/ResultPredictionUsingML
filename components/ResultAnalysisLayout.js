@@ -2,7 +2,22 @@ import { useState } from 'react';
 
 export default function ResultAnalysisLayout({ gradeCount, total }) {
   const chartData = Object.values(gradeCount);
-  const labels = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F'];
+  const labels = [
+    'A',
+    'A-',
+    'B+',
+    'B',
+    'B-',
+    'C+',
+    'C',
+    'C-',
+    'D+',
+    'D',
+    'F',
+    'Abs',
+    'Expe',
+    'CNR',
+  ];
 
   const [tooltipContent, setTooltipContent] = useState('');
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -41,7 +56,7 @@ export default function ResultAnalysisLayout({ gradeCount, total }) {
               </div>
               <div className="flex items-center text-sm">
                 <div className="p-1">Total Attempts :</div>
-                <div className=''>{total}</div>
+                <div className="">{total}</div>
               </div>
             </div>
           </div>

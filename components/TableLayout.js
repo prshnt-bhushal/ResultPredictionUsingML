@@ -1,18 +1,22 @@
 import { useQuery } from 'react-query';
 import { getResults } from '../lib/helper';
 import ResultAnalysisLayout from './ResultAnalysisLayout';
+import ResultPredict from './ResultPredict';
 
-export default function TableLayout({ symbolNumber}) {
+export default function TableLayout({ symbolNumber }) {
   const {
     isLoading,
     error,
     data = {},
-  } = useQuery('results', () => getResults(symbolNumber), {
-    onSuccess: (data) => {
-      console.log(data.results);
-    },
-  });
+  } = useQuery('results', () => getResults(symbolNumber)
+  // , {
+  //   onSuccess: (data) => {
+  //     console.log('success');
+  //   },
+  // }
+  );
   const results = data.results || [];
+  const subjectData = [];
 
   if (isLoading) return <div>Data Loading...</div>;
   if (error) return <div>{error.message}</div>;
@@ -30,6 +34,9 @@ export default function TableLayout({ symbolNumber}) {
     'D+': 0,
     D: 0,
     F: 0,
+    Abs: 0,
+    Expelled: 0,
+    CNR: 0,
   };
   let totalGrades = 0;
   results.forEach((result) => {
@@ -38,6 +45,10 @@ export default function TableLayout({ symbolNumber}) {
       if (grade !== null && gradeCount.hasOwnProperty(grade)) {
         gradeCount[grade]++;
         totalGrades++;
+        subjectData.push({
+          name: subject.name,
+          grade: subject.grade,
+        });
       }
     });
   });
@@ -45,9 +56,10 @@ export default function TableLayout({ symbolNumber}) {
   return (
     <>
       <div className="p-3">
-        {/* <h2 className="font-medium text-lg">Score</h2> */}
+        {/* Analysis Section */}
         <ResultAnalysisLayout gradeCount={gradeCount} total={totalGrades} />
       </div>
+      {/* Table Section */}
       <div className="grid gap-4 mt-2 md:grid-cols-2">
         {results.map((result, index) => (
           <div key={index}>
@@ -81,6 +93,10 @@ export default function TableLayout({ symbolNumber}) {
             </table>
           </div>
         ))}
+      </div>
+      {/* Prediction Section */}
+      <div>
+        <ResultPredict subjectData={subjectData} />
       </div>
     </>
   );
