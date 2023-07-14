@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+import Chart from 'chart.js/auto';
 import { useState } from 'react';
+import { Chart as TwChart, initTE } from 'tw-elements';
 
 export default function ResultAnalysisLayout({ gradeCount, total }) {
   const chartData = Object.values(gradeCount);
@@ -38,17 +41,61 @@ export default function ResultAnalysisLayout({ gradeCount, total }) {
     setTooltipY(0);
   };
 
-  return (
-    <div className="w-lg px-4">
-      <div className="max-w-lg mx-auto py-5">
-        <div className="shadow p-6 rounded-lg bg-white">
-          <div className="md:flex md:justify-between md:items-center">
-            {/* <div>
-              <h2 className="text-xl text-gray-800 font-bold p-2 leading-tight">
-                Past Results
-              </h2>
-            </div> */}
+  // Doughnut Chart
+  useEffect(() => {
+    initTE(); // Initialize Tw-Elements
 
+    // Doughnut chart data
+    const dataDoughnut = {
+      labels: labels.slice(0, chartData.length),
+      datasets: [
+        {
+          label: 'Grades',
+          data: chartData,
+          backgroundColor: [
+            'rgb(51, 204, 51)',
+            'rgb(31, 122, 31)',
+            'rgb(38, 88, 89)',
+            'rgb(46, 106, 107)',
+            'rgb(61, 141, 143)',
+            'rgb(204, 82, 0)',
+            'rgb(255, 117, 26)',
+            'rgb(255, 92, 51)',
+            'rgb(255, 153, 51)',
+            'rgb(255, 128, 0)',
+            'rgb(255, 64, 0)',
+            'rgb(153, 204, 255)',
+            'rgb(255, 83, 26)',
+            'rgb(255, 102, 51)',
+          ].slice(0, chartData.length),
+          hoverOffset: 4,
+        },
+      ],
+    };
+
+    // Doughnut chart configuration
+    const configDoughnut = {
+      type: 'doughnut',
+      data: dataDoughnut,
+      options: {},
+    };
+
+    // Render the doughnut chart
+    const chartDoughnut = new Chart(
+      document.getElementById('chartDoughnut'),
+      configDoughnut
+    );
+
+    return () => {
+      chartDoughnut.destroy(); // Clean up the chart instance when the component unmounts
+    };
+  }, [chartData, labels]);
+
+  return (
+    <div className="sm:w-lg px-4">
+      <div className="sm:mx-auto py-5 grid md:justify-evenly md:flex">
+        <div className="shadow p-6 rounded-lg md:w-[900px] bg-white">
+          <div className="md:flex md:justify-between md:items-center">
             <div className="mb-4 flex">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-[#337476] mr-2 rounded-full"></div>
@@ -118,6 +165,11 @@ export default function ResultAnalysisLayout({ gradeCount, total }) {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+        <div className="sm:mx-auto py-5 grid md:justify-evenly md:flex">
+          <div className="shadow rounded-lg bg-white">
+            <canvas id="chartDoughnut"></canvas>
           </div>
         </div>
       </div>

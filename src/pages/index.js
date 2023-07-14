@@ -13,9 +13,10 @@ export default function Home() {
   return (
     <div>
       <Layout title="HOME">
-        {/* what Section */}
+        <div className='pt-[69px]'>
+                {/* what Section */}
         <HomeLayout
-          sideImg={whatImg}
+          // sideImg={whatImg}
           title={'What'}
           direction={'md:flex-row'}
           description={descriptionAll.whatDescription}
@@ -23,14 +24,14 @@ export default function Home() {
         />
         {/* why Section */}
         <HomeLayout
-          sideImg={whyImg}
+          // sideImg={whyImg}
           title={'Why'}
           description={descriptionAll.whyDescription}
           direction={'md:flex-row-reverse'}
         />
         {/* where Section */}
         <HomeLayout
-          sideImg={whereImg}
+          // sideImg={whereImg}
           title={'Where'}
           direction={'md:flex-row'}
           description={descriptionAll.whereDescription}
@@ -38,14 +39,14 @@ export default function Home() {
         />
         {/* when Section */}
         <HomeLayout
-          sideImg={whenImg}
+          // sideImg={whenImg}
           title={'When'}
           description={descriptionAll.whenDescription}
           direction={'md:flex-row-reverse'}
         />
         {/* who Section */}
         <HomeLayout
-          sideImg={whoImg}
+          // sideImg={whoImg}
           title={'Who'}
           direction={'md:flex-row'}
           description={descriptionAll.whoDescription}
@@ -53,23 +54,24 @@ export default function Home() {
         />
         {/* how Section */}
         <HomeLayout
-          sideImg={howImg}
+          // sideImg={howImg}
           title={'How'}
           description={descriptionAll.howDescription}
           direction={'md:flex-row-reverse'}
         />
         {/* how much Section */}
         <HomeLayout
-          sideImg={howMuchImg}
+          // sideImg={howMuchImg}
           title={'How Much'}
           direction={'md:flex-row'}
-          description={descriptionAll.howMuchDescription}
+          // description={descriptionAll.howMuchDescription}
           bgColor={'bg-white'}
         />
         <div className="flex">
           <span className="p-10 text-sm text-gray-400">
             Home page made on " W5HH " Principle
           </span>
+        </div>
         </div>
       </Layout>
     </div>

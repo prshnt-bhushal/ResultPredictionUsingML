@@ -12,16 +12,16 @@ export default function HomeLayout({
     <div
       className={`flex flex-col w-full p-10 justify-center items-center ${bgColor} ${direction}`}
     >
-      <div className="px-3 m-2 basis-[30%]">
+      {/* <div className="px-3 m-2 basis-[30%]">
         <Image
           src={sideImg}
           alt="Image on side of W5HH"
           width={500}
           height={300}
         />
-      </div>
+      </div> */}
       {/* Introduction section*/}
-      <div className="text-justify px-3 m-2 basis-[70%]">
+      <div className="text-justify px-3 m-2">
         <h2 className="uppercase p-1 text-3xl mb-2 bg-slate-300">{title}</h2>
         <p>{description}</p>
       </div>

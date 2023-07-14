@@ -65,7 +65,7 @@ export default function TableLayout({ symbolNumber }) {
       {/* Table Section */}
       <div className="grid gap-4 mt-2 md:grid-cols-2">
         {results.map((result, index) => (
-          <div key={index}>
+          <div key={index} className='my-2'>
             <h2 className="uppercase text-lg font-semibold p-2">
               {result.semester} Semester
             </h2>
@@ -130,6 +130,8 @@ function gradeConversion(grade) {
     case 'D':
       return 1.0;
     case 'F':
+      return 0.0;
+    case 'Abs':
       return 0.0;
     case 'CNR':
       return 0.0;
