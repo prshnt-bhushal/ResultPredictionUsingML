@@ -19,7 +19,7 @@ export default function NavBar() {
             alt="logo"
             width={26}
           />
-          <h1 className='px-2'>Result Predication</h1>
+          <h1 className='px-2'>Result Prediction</h1>
         </div>
         <div className="flex gap-6 uppercase">
           <ul className="flex font-medium justify-between gap-4 ">
