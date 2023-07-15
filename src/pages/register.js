@@ -29,24 +29,33 @@ export default function registerScreen({ setIsLoadingProps}) {
   const submitHandler = async ({ sNum, name, email, password }) => {
     setIsLoadingProps(true); // Set loading state to true
     try {
-      await axios.post('/api/auth/signup', { sNum, name, email, password });
+      const response = await axios.post('/api/auth/signup', {
+        sNum,
+        name,
+        email,
+        password,
+      });
 
-      const res = await signIn('credentials', {
+      const { data } = response;
+      const { message, user } = data;
+
+      toast.success(message); // Display success message
+
+      await signIn('credentials', {
         redirect: false,
         sNum,
         name,
         email,
         password,
       });
-      if (res.error) {
-        toast.error(res.error);
-      }
+
+      router.push(redirect || '/profile');
     } catch (err) {
-      toast.error(getError(err));
+      const errorMessage = getError(err);
+      toast.error(errorMessage); // Display error message
+    } finally {
+      setIsLoadingProps(false); // Set loading state to false
     }
-    setTimeout(() => {
-      setIsLoadingProps(false); // Set loading state to false after 3 seconds
-    }, 3000);
   };
   return (
     <Layout title="Create Account">
