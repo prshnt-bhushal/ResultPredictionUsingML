@@ -1,0 +1,2 @@
+sNum,semester,subjects[0].name,subjects[1].name,subjects[2].name,subjects[3].name,subjects[4].name,subjects[5].name,subjects[0].grade,subjects[1].grade,subjects[2].grade,subjects[3].grade,subjects[4].grade,subjects[5].grade
+22070001,first,Engineering Mathmatics-I,Chemistry,Communication Techniques,Programming In C,Basic Electrical Engineering,Mechanical Workshop,A,B,C,B,F,B+
