@@ -9,6 +9,7 @@ export default function ResultPredict({ subjectData }) {
   const [isFetching, setIsFetching] = useState(false);
   const handlePredict = async () => {
     try {
+      toast.success("Predicting")
       setIsFetching(true);
       const response = await fetch('http://127.0.0.1:5000/api/predict', {
         method: 'POST',
